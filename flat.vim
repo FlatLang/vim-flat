@@ -63,8 +63,6 @@ syn match flatDestructor /\%#=1@\K\k*/ contained nextgroup=flatParameters skipwh
 syn keyword flatStatement enum nextgroup=flatEnumName skipwhite
 syn match flatEnumName /\%#=1\K\k*/ contained contains=flatKeywordError nextgroup=flatEnumBlock,flatEnumInheritanceOperator skipwhite
 syn match flatEnumName /\%#=1@\K\k*/ contained nextgroup=flatEnumBlock,flatEnumInheritanceOperator skipwhite
-syn match flatEnumInheritanceOperator /\%#=1:/ contained nextgroup=flatEnumType skipwhite
-syn keyword flatEnumType byte sbyte short ushort int uint long ulong nint nuint contained nextgroup=flatEnumBlock skipwhite
 syn region flatEnumBlock matchgroup=flatDelimiter start=/\%#=1{/ end=/\%#=1}/ contained contains=flatDeclarator fold
 
 syn keyword flatStatement if switch while nextgroup=flatCondition skipwhite
@@ -349,7 +347,6 @@ hi def link flatMethodTypeConstraintModifier flatTypeConstraintModifier
 hi def link flatTypeVariable flatIdentifier
 hi def link flatEnumName Typedef
 hi def link flatEnumInheritanceOperator flatOperator
-hi def link flatEnumType flatType
 hi def link flatDelimiter Delimiter
 hi def link flatModifier flatStatement
 hi def link flatFunctionPointerModifier flatTypeModifier
