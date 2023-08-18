@@ -223,7 +223,7 @@ syn match flatStringInterpolationError /\%#=1[#]/ contained
 syn region flatStringInterpolation matchgroup=flatStringInterpolationDelimiter start=/\%#=1\#{/ end=/\%#=1\%([,:].\{-}\)\=}/ contained contains=@flatRHS
 
 syn match flatEscapeSequenceError /\%#=1\\./ contained
-syn match flatEscapeSequence /\%#=1\\\%(['"\\0abfnrtv]\|x\x\{1,4}\|u\x\{4}\|U\x\{8}\)/ contained
+syn match flatEscapeSequence /\%#=1\\\%([#'"\\0abfnrtv]\|x\x\{1,4}\|u\x\{4}\|U\x\{8}\)/ contained
 
 syn match flatQuoteEscape /\%#=1""/ contained
 syn match flatBraceEscape /\%#=1{{/ contained
