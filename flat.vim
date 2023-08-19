@@ -292,20 +292,8 @@ syn region flatIndexSetter matchgroup=flatDelimiter start=/\%#=1\[/ end=/\%#=1]/
 " Miscellaneous (high priority) {{{2
 syn region flatComment matchgroup=flatCommentStart start=/\%#=1\/\// end=/\%#=1$/ contains=flatTodo containedin=@flatExtras
 syn region flatComment matchgroup=flatCommentStart start=/\%#=1\/\*/ matchgroup=flatCommentEnd end=/\%#=1\*\// contains=flatTodo containedin=@flatExtras
-syn region flatComment matchgroup=flatCommentStart start=/\%#=1\/\/\// end=/\%#=1$/ keepend contains=flatTodo,flatXMLTag,flatXMLEndTag containedin=@flatExtras
+syn region flatComment matchgroup=flatCommentStart start=/\%#=1\/\/\// end=/\%#=1$/ keepend contains=flatTodo containedin=@flatExtras
 syn keyword flatTodo TODO NOTE XXX FIXME HACK TBD contained
-
-syn region flatXMLTag matchgroup=flatXMLTag start=/\%#=1<\a[^[:space:]/>]*/ end=/\%#=1>/ contained oneline contains=flatXMLAttribute
-syn match flatXMLEndTag /\%#=1<\/\a[^[:space:]/>]*>/ contained
-
-syn match flatXMLAttribute /\%#=1[^>/=[:space:]]\+/ contained nextgroup=flatXMLAttributeOperator skipwhite
-syn match flatXMLAttributeOperator /\%#=1=/ contained nextgroup=flatXMLValue skipwhite
-
-syn region flatXMLValue matchgroup=flatXMLValueDelimiter start=/\%#=1"/ end=/\%#=1"/ contained oneline
-syn region flatXMLValue matchgroup=flatXMLValueDelimiter start=/\%#=1'/ end=/\%#=1'/ contained oneline
-
-syn match flatDirective /\%#=1#.*/ containedin=@flatBlocks
-syn region flatRegion matchgroup=flatDirective start=/\%#=1#region\>.*/ end=/\%#=1#endregion\>.*/ containedin=@flatBlocks,flatRegion transparent fold
 
 syn match flatTypeModifier /\%#=1[*?]/ contained nextgroup=flatDeclarator,flatTypeModifier skipwhite
 syn region flatTypeModifier matchgroup=flatDelimiter start=/\%#=1\[/ end=/\%#=1\]/ contained contains=@flatRHS nextgroup=flatDeclarator,flatInitializer,flatTypeModifier skipwhite
@@ -319,14 +307,13 @@ syn cluster flatBlocks contains=flat\a\{-}Block
 
 syn cluster flatExtras contains=
       \ ALLBUT,
-      \ flatString,flatCharacter,flatComment,flatXML\a\{-},flatDirective,flatEscapeSequenceError
+      \ flatString,flatCharacter,flatComment,flatEscapeSequenceError
 
 " Highlighting {{{1
 hi def link flatComment Comment
 hi def link flatCommentStart flatComment
 hi def link flatCommentEnd flatCommentStart
 hi def link flatTodo Todo
-hi def link flatDirective PreProc
 hi def link flatStatement Statement
 hi def link flatTypeName Typedef
 hi def link flatRecordName flatTypeName
@@ -403,12 +390,6 @@ hi def link flatQuoteEscape flatEscapeSequence
 hi def link flatBraceEscape flatEscapeSequence
 hi def link flatAttribute flatIdentifier
 hi def link flatAttributeDelimiter flatDelimiter
-hi def link flatXMLTag Special
-hi def link flatXMLEndTag flatXMLTag
-hi def link flatXMLAttribute Keyword
-hi def link flatXMLAttributeOperator Operator
-hi def link flatXMLValue String
-hi def link flatXMLValueDelimiter flatDelimiter
 hi def link flatPatternType flatType
 hi def link flatPatternTypeIdentifier flatTypeIdentifier
 hi def link flatPatternTypeMemberAccessOperator flatMemberAccessOperator
